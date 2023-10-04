@@ -1,14 +1,7 @@
 import { hostname } from 'os';
 
-import {
-  FullLog,
-  Hook,
-  Log,
-  LogLevel,
-  LogMetadata,
-  QuillOptions,
-} from './interfaces';
-import { LogOutputFormat } from './quill.enum';
+import { FullLog, Hook, Log, LogMetadata, QuillOptions } from './interfaces';
+import { LogLevel, LogOutputFormat } from './quill.enum';
 
 export class Quill {
   private readonly hooks: Hook[];
@@ -27,6 +20,11 @@ export class Quill {
     INFO: 30,
     WARN: 40,
     ERROR: 50,
+    trace: 10,
+    debug: 20,
+    info: 30,
+    warn: 40,
+    error: 50,
   };
 
   constructor({
@@ -36,7 +34,7 @@ export class Quill {
     region,
     stage,
     environment,
-    level = 'INFO',
+    level = LogLevel.INFO,
     hooks = [],
     logOutputFormat = LogOutputFormat.JSON,
   }: QuillOptions) {
@@ -52,23 +50,23 @@ export class Quill {
   }
 
   trace(message: Log | string) {
-    this.log('TRACE', message);
+    this.log(LogLevel.TRACE, message);
   }
 
   info(message: Log | string) {
-    this.log('INFO', message);
+    this.log(LogLevel.INFO, message);
   }
 
   warn(message: Log | string) {
-    this.log('WARN', message);
+    this.log(LogLevel.WARN, message);
   }
 
   error(message: Log | string) {
-    this.log('ERROR', message);
+    this.log(LogLevel.ERROR, message);
   }
 
   debug(message: Log | string) {
-    this.log('DEBUG', message);
+    this.log(LogLevel.DEBUG, message);
   }
 
   private log(level: LogLevel, log: Log | string) {
