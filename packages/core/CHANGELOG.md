@@ -1,3 +1,5 @@
+## [1.2.1](https://github.com/rpidanny/quill/compare/quill-v1.2.0...quill-v1.2.1) (2023-10-04)
+
 # [1.2.0](https://github.com/rpidanny/quill/compare/quill-v1.1.0...quill-v1.2.0) (2023-10-04)
 
 ### Features
