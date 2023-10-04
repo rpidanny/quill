@@ -1,3 +1,9 @@
+## [1.2.2](https://github.com/rpidanny/quill/compare/quill-v1.2.1...quill-v1.2.2) (2023-10-04)
+
+### Bug Fixes
+
+- date as iso string instead of raw timestamp ([#4](https://github.com/rpidanny/quill/issues/4)) ([98affa5](https://github.com/rpidanny/quill/commit/98affa54a92fb804e6f5ef27735471d07e0f9153))
+
 ## [1.2.1](https://github.com/rpidanny/quill/compare/quill-v1.2.0...quill-v1.2.1) (2023-10-04)
 
 # [1.2.0](https://github.com/rpidanny/quill/compare/quill-v1.1.0...quill-v1.2.0) (2023-10-04)
