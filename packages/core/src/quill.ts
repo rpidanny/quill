@@ -8,6 +8,7 @@ import {
   LogMetadata,
   QuillOptions,
 } from './interfaces';
+import { LogOutputFormat } from './quill.enum';
 
 export class Quill {
   private readonly hooks: Hook[];
@@ -18,6 +19,7 @@ export class Quill {
   private readonly environment?: string;
   private readonly region?: string;
   private readonly level: LogLevel;
+  private readonly logOutputFormat: LogOutputFormat;
 
   private readonly logLevels: { [key in LogLevel]: number } = {
     TRACE: 10,
@@ -36,6 +38,7 @@ export class Quill {
     environment,
     level = 'INFO',
     hooks = [],
+    logOutputFormat = LogOutputFormat.JSON,
   }: QuillOptions) {
     this.hooks = hooks;
     this.service = service;
@@ -45,6 +48,7 @@ export class Quill {
     this.stage = stage;
     this.environment = environment;
     this.level = level;
+    this.logOutputFormat = logOutputFormat;
   }
 
   trace(message: Log | string) {
@@ -96,7 +100,12 @@ export class Quill {
   }
 
   private write(fullLog: FullLog) {
-    process.stdout.write(`${JSON.stringify(fullLog)}\n`);
+    if (this.logOutputFormat === LogOutputFormat.TEXT) {
+      const logText = `[${fullLog.timestamp}] [${fullLog.level}] ${fullLog.message}\n`;
+      process.stdout.write(logText);
+    } else if (this.logOutputFormat === LogOutputFormat.JSON) {
+      process.stdout.write(`${JSON.stringify(fullLog)}\n`);
+    }
   }
 
   private getMetadata(level: LogLevel): LogMetadata {
