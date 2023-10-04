@@ -99,7 +99,9 @@ export class Quill {
 
   private write(fullLog: FullLog) {
     if (this.logOutputFormat === LogOutputFormat.TEXT) {
-      const logText = `[${fullLog.timestamp}] [${fullLog.level}] ${fullLog.message}\n`;
+      const logText = `[${new Date(fullLog.timestamp).toISOString()}] [${
+        fullLog.level
+      }] ${fullLog.message}\n`;
       process.stdout.write(logText);
     } else if (this.logOutputFormat === LogOutputFormat.JSON) {
       process.stdout.write(`${JSON.stringify(fullLog)}\n`);
