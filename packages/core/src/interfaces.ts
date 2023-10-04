@@ -1,3 +1,5 @@
+import { LogOutputFormat } from './quill.enum';
+
 export type LogLevel = 'DEBUG' | 'ERROR' | 'INFO' | 'TRACE' | 'WARN';
 export type Hook = (log: FullLog) => FullLog;
 
@@ -10,6 +12,7 @@ export interface QuillOptions {
   componentName?: string;
   level?: LogLevel;
   hooks?: Hook[];
+  logOutputFormat?: LogOutputFormat;
 }
 
 export interface Log {

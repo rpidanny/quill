@@ -1,5 +1,6 @@
 import { LogLevel } from './interfaces';
 import { Quill } from './quill';
+import { LogOutputFormat } from './quill.enum';
 
 type LowerCaseLogLevels = 'debug' | 'error' | 'info' | 'trace' | 'warn';
 
@@ -155,6 +156,25 @@ describe('quill', () => {
 
         expect(hooks[0]).toHaveBeenCalledWith(expectedFullLog);
         expect(hooks[1]).toHaveBeenCalledWith(expectedFullLog);
+      });
+
+      it('should log string with the correct log level in text format', () => {
+        const stdOutSpy = jest.spyOn(process.stdout, 'write');
+
+        const logger = new Quill({
+          appName,
+          level: level as LogLevel,
+          region,
+          environment,
+          stage,
+          logOutputFormat: LogOutputFormat.TEXT,
+        });
+
+        logger[LogLevelsMapping[level as LogLevel]](logMessage);
+
+        expect(stdOutSpy).toHaveBeenCalledWith(
+          expect.stringContaining(`[${level}] ${logMessage}`)
+        );
       });
     }
   );
