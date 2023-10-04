@@ -1,6 +1,5 @@
-import { LogLevel } from './interfaces';
 import { Quill } from './quill';
-import { LogOutputFormat } from './quill.enum';
+import { LogLevel, LogOutputFormat } from './quill.enum';
 
 type LowerCaseLogLevels = 'debug' | 'error' | 'info' | 'trace' | 'warn';
 
@@ -10,6 +9,11 @@ const LogLevelsMapping: Record<LogLevel, LowerCaseLogLevels> = {
   INFO: 'info',
   WARN: 'warn',
   ERROR: 'error',
+  trace: 'trace',
+  debug: 'debug',
+  info: 'info',
+  warn: 'warn',
+  error: 'error',
 };
 
 describe('quill', () => {
@@ -26,7 +30,7 @@ describe('quill', () => {
 
     const logger = new Quill({
       appName,
-      level: 'ERROR',
+      level: LogLevel.ERROR,
     });
 
     logger.info(logMessage);
@@ -34,148 +38,145 @@ describe('quill', () => {
     expect(stdOutSpy).not.toHaveBeenCalled();
   });
 
-  describe.each(['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'])(
-    'log level %s',
-    (level) => {
-      afterEach(() => {
-        jest.clearAllMocks();
-        jest.resetAllMocks();
+  describe.each(Object.keys(LogLevel))('log level %s', (level) => {
+    afterEach(() => {
+      jest.clearAllMocks();
+      jest.resetAllMocks();
+    });
+
+    it('should log string with the correct log level', () => {
+      const stdOutSpy = jest.spyOn(process.stdout, 'write');
+
+      const logger = new Quill({
+        appName,
+        level: level as LogLevel,
+        region,
+        environment,
+        stage,
       });
 
-      it('should log string with the correct log level', () => {
-        const stdOutSpy = jest.spyOn(process.stdout, 'write');
+      logger[LogLevelsMapping[level as LogLevel]](logMessage);
 
-        const logger = new Quill({
-          appName,
-          level: level as LogLevel,
-          region,
-          environment,
-          stage,
-        });
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`"message":"${logMessage}"`)
+      );
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`"region":"${region}"`)
+      );
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`"environment":"${environment}"`)
+      );
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`"stage":"${stage}"`)
+      );
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`"level":"${level.toUpperCase()}"`)
+      );
+    });
 
-        logger[LogLevelsMapping[level as LogLevel]](logMessage);
+    it('should log log object with the correct log level', () => {
+      const stdOutSpy = jest.spyOn(process.stdout, 'write');
 
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(`"message":"${logMessage}"`)
-        );
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(`"region":"${region}"`)
-        );
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(`"environment":"${environment}"`)
-        );
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(`"stage":"${stage}"`)
-        );
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(`"level":"${level}"`)
-        );
+      const logger = new Quill({
+        appName,
+        level: level as LogLevel,
+        region,
+        environment,
+        stage,
       });
 
-      it('should log log object with the correct log level', () => {
-        const stdOutSpy = jest.spyOn(process.stdout, 'write');
-
-        const logger = new Quill({
-          appName,
-          level: level as LogLevel,
-          region,
-          environment,
-          stage,
-        });
-
-        logger[LogLevelsMapping[level as LogLevel]]({
-          message: logMessage,
-          details: logDetails,
-        });
-
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(`"message":"${logMessage}"`)
-        );
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(`"details":${JSON.stringify(logDetails)}`)
-        );
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(`"region":"${region}"`)
-        );
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(`"environment":"${environment}"`)
-        );
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(`"stage":"${stage}"`)
-        );
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(`"level":"${level}"`)
-        );
+      logger[LogLevelsMapping[level as LogLevel]]({
+        message: logMessage,
+        details: logDetails,
       });
 
-      it('should log error with the correct log level', () => {
-        const stdOutSpy = jest.spyOn(process.stdout, 'write');
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`"message":"${logMessage}"`)
+      );
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`"details":${JSON.stringify(logDetails)}`)
+      );
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`"region":"${region}"`)
+      );
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`"environment":"${environment}"`)
+      );
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`"stage":"${stage}"`)
+      );
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`"level":"${level.toUpperCase()}"`)
+      );
+    });
 
-        const err = new Error(logMessage);
+    it('should log error with the correct log level', () => {
+      const stdOutSpy = jest.spyOn(process.stdout, 'write');
 
-        const logger = new Quill({
-          appName,
-          level: level as LogLevel,
-        });
+      const err = new Error(logMessage);
 
-        logger[LogLevelsMapping[level as LogLevel]]({
-          err,
-        });
-
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(`"message":"${err.message}"`)
-        );
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(
-            `"err":${JSON.stringify({
-              name: err.name,
-              message: err.message,
-              stack: err.stack,
-            })}`
-          )
-        );
+      const logger = new Quill({
+        appName,
+        level: level as LogLevel,
       });
 
-      it('should call hooks with the correct log level', () => {
-        const hooks = [
-          jest.fn().mockImplementation((log) => log),
-          jest.fn().mockImplementation((log) => log),
-        ];
-        const logger = new Quill({ appName, hooks, level: level as LogLevel });
-
-        logger[LogLevelsMapping[level as LogLevel]]('test');
-
-        const expectedFullLog = expect.objectContaining({
-          level,
-          appName,
-          message: 'test',
-          timestamp: expect.any(Number),
-          dateString: expect.any(String),
-          hostname: expect.any(String),
-        });
-
-        expect(hooks[0]).toHaveBeenCalledWith(expectedFullLog);
-        expect(hooks[1]).toHaveBeenCalledWith(expectedFullLog);
+      logger[LogLevelsMapping[level as LogLevel]]({
+        err,
       });
 
-      it('should log string with the correct log level in text format', () => {
-        const stdOutSpy = jest.spyOn(process.stdout, 'write');
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`"message":"${err.message}"`)
+      );
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          `"err":${JSON.stringify({
+            name: err.name,
+            message: err.message,
+            stack: err.stack,
+          })}`
+        )
+      );
+    });
 
-        const logger = new Quill({
-          appName,
-          level: level as LogLevel,
-          region,
-          environment,
-          stage,
-          logOutputFormat: LogOutputFormat.TEXT,
-        });
+    it('should call hooks with the correct log level', () => {
+      const hooks = [
+        jest.fn().mockImplementation((log) => log),
+        jest.fn().mockImplementation((log) => log),
+      ];
+      const logger = new Quill({ appName, hooks, level: level as LogLevel });
 
-        logger[LogLevelsMapping[level as LogLevel]](logMessage);
+      logger[LogLevelsMapping[level as LogLevel]]('test');
 
-        expect(stdOutSpy).toHaveBeenCalledWith(
-          expect.stringContaining(`[${level}] ${logMessage}`)
-        );
+      const expectedFullLog = expect.objectContaining({
+        level: level.toUpperCase(),
+        appName,
+        message: 'test',
+        timestamp: expect.any(Number),
+        dateString: expect.any(String),
+        hostname: expect.any(String),
       });
-    }
-  );
+
+      expect(hooks[0]).toHaveBeenCalledWith(expectedFullLog);
+      expect(hooks[1]).toHaveBeenCalledWith(expectedFullLog);
+    });
+
+    it('should log string with the correct log level in text format', () => {
+      const stdOutSpy = jest.spyOn(process.stdout, 'write');
+
+      const logger = new Quill({
+        appName,
+        level: level as LogLevel,
+        region,
+        environment,
+        stage,
+        logOutputFormat: LogOutputFormat.TEXT,
+      });
+
+      logger[LogLevelsMapping[level as LogLevel]](logMessage);
+
+      expect(stdOutSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`[${level.toUpperCase()}] ${logMessage}`)
+      );
+    });
+  });
 });
