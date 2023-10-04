@@ -1,3 +1,9 @@
+# [1.2.0](https://github.com/rpidanny/quill/compare/quill-v1.1.0...quill-v1.2.0) (2023-10-04)
+
+### Features
+
+- add log output format ([#2](https://github.com/rpidanny/quill/issues/2)) ([d8fe122](https://github.com/rpidanny/quill/commit/d8fe12267f2329d7805af79df7044eeebc58ee44))
+
 # [1.1.0](https://github.com/rpidanny/quill/compare/quill-v1.0.0...quill-v1.1.0) (2023-09-27)
 
 ### Features
