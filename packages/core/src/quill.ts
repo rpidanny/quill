@@ -99,9 +99,9 @@ export class Quill {
 
   private write(fullLog: FullLog) {
     if (this.logOutputFormat === LogOutputFormat.TEXT) {
-      const logText = `[${new Date(fullLog.timestamp).toISOString()}] [${
-        fullLog.level
-      }] ${fullLog.message}\n`;
+      const date = new Date(fullLog.timestamp).toISOString();
+      const colouredLevel = this.getColorForLogLevel(fullLog.level as LogLevel);
+      const logText = `[${date}] [${colouredLevel}] ${fullLog.message}\n`;
       process.stdout.write(logText);
     } else if (this.logOutputFormat === LogOutputFormat.JSON) {
       process.stdout.write(`${JSON.stringify(fullLog)}\n`);
@@ -131,5 +131,22 @@ export class Quill {
       message: err.message,
       stack: err.stack,
     };
+  }
+
+  private getColorForLogLevel(level: LogLevel): string {
+    switch (level) {
+      case LogLevel.TRACE:
+        return '\x1b[35mTRACE\x1b[0m'; // Magenta color for TRACE
+      case LogLevel.DEBUG:
+        return '\x1b[36mDEBUG\x1b[0m'; // Cyan color for DEBUG
+      case LogLevel.INFO:
+        return '\x1b[32mINFO\x1b[0m'; // Green color for INFO
+      case LogLevel.WARN:
+        return '\x1b[33mWARN\x1b[0m'; // Yellow color for WARN
+      case LogLevel.ERROR:
+        return '\x1b[31mERROR\x1b[0m'; // Red color for ERROR
+      default:
+        return level; // Return the log level as is if it's not recognized
+    }
   }
 }

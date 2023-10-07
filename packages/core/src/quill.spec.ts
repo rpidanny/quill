@@ -16,6 +16,19 @@ const LogLevelsMapping: Record<LogLevel, LowerCaseLogLevels> = {
   error: 'error',
 };
 
+const LogLevelsWithColorMapping: Record<LogLevel, string> = {
+  TRACE: '\x1b[35mTRACE\x1b[0m',
+  DEBUG: '\x1b[36mDEBUG\x1b[0m',
+  INFO: '\x1b[32mINFO\x1b[0m',
+  WARN: '\x1b[33mWARN\x1b[0m',
+  ERROR: '\x1b[31mERROR\x1b[0m',
+  trace: '\x1b[35mTRACE\x1b[0m',
+  debug: '\x1b[36mDEBUG\x1b[0m',
+  info: '\x1b[32mINFO\x1b[0m',
+  warn: '\x1b[33mWARN\x1b[0m',
+  error: '\x1b[31mERROR\x1b[0m',
+};
+
 describe('quill', () => {
   const appName = 'test';
   const stage = 'test';
@@ -175,7 +188,9 @@ describe('quill', () => {
       logger[LogLevelsMapping[level as LogLevel]](logMessage);
 
       expect(stdOutSpy).toHaveBeenCalledWith(
-        expect.stringContaining(`[${level.toUpperCase()}] ${logMessage}`)
+        expect.stringContaining(
+          `[${LogLevelsWithColorMapping[level as LogLevel]}] ${logMessage}`
+        )
       );
     });
   });
