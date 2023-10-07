@@ -1,3 +1,9 @@
+# [1.3.0](https://github.com/rpidanny/quill/compare/quill-v1.2.2...quill-v1.3.0) (2023-10-07)
+
+### Features
+
+- add coloured log level ([87d4933](https://github.com/rpidanny/quill/commit/87d4933975ebf03a856cc41300b6be4e690eb8a7))
+
 ## [1.2.2](https://github.com/rpidanny/quill/compare/quill-v1.2.1...quill-v1.2.2) (2023-10-04)
 
 ### Bug Fixes
