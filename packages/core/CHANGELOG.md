@@ -1,3 +1,9 @@
+# [1.4.0](https://github.com/rpidanny/quill/compare/quill-v1.3.1...quill-v1.4.0) (2023-10-22)
+
+### Features
+
+- add fatal level ([#7](https://github.com/rpidanny/quill/issues/7)) ([2d04a77](https://github.com/rpidanny/quill/commit/2d04a7735a7e9891408a1b12610205bc45796f68))
+
 ## [1.3.1](https://github.com/rpidanny/quill/compare/quill-v1.3.0...quill-v1.3.1) (2023-10-22)
 
 # [1.3.0](https://github.com/rpidanny/quill/compare/quill-v1.2.2...quill-v1.3.0) (2023-10-07)
