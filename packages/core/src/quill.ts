@@ -1,7 +1,7 @@
 import { hostname } from 'os';
 
 import { FullLog, Hook, Log, LogMetadata, QuillOptions } from './interfaces';
-import { LogLevel, LogOutputFormat } from './quill.enum';
+import { AllLogLevels, LogLevel, LogOutputFormat } from './quill.enum';
 
 export class Quill {
   private readonly hooks: Hook[];
@@ -11,10 +11,10 @@ export class Quill {
   private readonly stage?: string;
   private readonly environment?: string;
   private readonly region?: string;
-  private readonly level: LogLevel;
+  private readonly level: AllLogLevels;
   private readonly logOutputFormat: LogOutputFormat;
 
-  private readonly logLevels: { [key in LogLevel]: number } = {
+  private readonly logLevels: { [key in AllLogLevels]: number } = {
     TRACE: 10,
     DEBUG: 20,
     INFO: 30,

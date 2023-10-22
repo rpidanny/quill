@@ -1,22 +1,25 @@
 import { Quill } from './quill';
-import { LogLevel, LogOutputFormat } from './quill.enum';
+import {
+  AllLogLevels,
+  LogLevel,
+  LogOutputFormat,
+  LowerCasedLogLevel,
+} from './quill.enum';
 
-type LowerCaseLogLevels = 'debug' | 'error' | 'info' | 'trace' | 'warn';
-
-const LogLevelsMapping: Record<LogLevel, LowerCaseLogLevels> = {
-  TRACE: 'trace',
-  DEBUG: 'debug',
-  INFO: 'info',
-  WARN: 'warn',
-  ERROR: 'error',
-  trace: 'trace',
-  debug: 'debug',
-  info: 'info',
-  warn: 'warn',
-  error: 'error',
+const LogLevelsMapping: Record<AllLogLevels, LowerCasedLogLevel> = {
+  TRACE: LowerCasedLogLevel.trace,
+  DEBUG: LowerCasedLogLevel.debug,
+  INFO: LowerCasedLogLevel.info,
+  WARN: LowerCasedLogLevel.warn,
+  ERROR: LowerCasedLogLevel.error,
+  trace: LowerCasedLogLevel.trace,
+  debug: LowerCasedLogLevel.debug,
+  info: LowerCasedLogLevel.info,
+  warn: LowerCasedLogLevel.warn,
+  error: LowerCasedLogLevel.error,
 };
 
-const LogLevelsWithColorMapping: Record<LogLevel, string> = {
+const LogLevelsWithColorMapping: Record<AllLogLevels, string> = {
   TRACE: '\x1b[35mTRACE\x1b[0m',
   DEBUG: '\x1b[36mDEBUG\x1b[0m',
   INFO: '\x1b[32mINFO\x1b[0m',

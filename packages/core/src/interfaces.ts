@@ -1,4 +1,4 @@
-import { LogLevel, LogOutputFormat } from './quill.enum';
+import { AllLogLevels, LogOutputFormat } from './quill.enum';
 
 export type Hook = (log: FullLog) => FullLog;
 
@@ -9,7 +9,7 @@ export interface QuillOptions {
   stage?: string;
   environment?: string;
   componentName?: string;
-  level?: LogLevel;
+  level?: AllLogLevels;
   hooks?: Hook[];
   logOutputFormat?: LogOutputFormat;
 }

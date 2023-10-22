@@ -9,9 +9,14 @@ export enum LogLevel {
   INFO = 'INFO',
   WARN = 'WARN',
   ERROR = 'ERROR',
+}
+
+export enum LowerCasedLogLevel {
   trace = 'trace',
   debug = 'debug',
   info = 'info',
   warn = 'warn',
   error = 'error',
 }
+
+export type AllLogLevels = LogLevel | LowerCasedLogLevel;
