@@ -6,15 +6,6 @@ import {
   LowerCasedLogLevel,
 } from './quill.enum';
 
-const LogLevelsMapping: Record<LogLevel, LowerCasedLogLevel> = {
-  TRACE: LowerCasedLogLevel.trace,
-  DEBUG: LowerCasedLogLevel.debug,
-  INFO: LowerCasedLogLevel.info,
-  WARN: LowerCasedLogLevel.warn,
-  ERROR: LowerCasedLogLevel.error,
-  FATAL: LowerCasedLogLevel.fatal,
-};
-
 const LogLevelsWithColorMapping: Record<LogLevel, string> = {
   TRACE: '\x1b[35mTRACE\x1b[0m',
   DEBUG: '\x1b[36mDEBUG\x1b[0m',
