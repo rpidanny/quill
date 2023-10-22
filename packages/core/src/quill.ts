@@ -11,20 +11,16 @@ export class Quill {
   private readonly stage?: string;
   private readonly environment?: string;
   private readonly region?: string;
-  private readonly level: AllLogLevels;
+  private readonly level: LogLevel;
   private readonly logOutputFormat: LogOutputFormat;
 
-  private readonly logLevels: { [key in AllLogLevels]: number } = {
+  private readonly logLevels: { [key in LogLevel]: number } = {
     TRACE: 10,
     DEBUG: 20,
     INFO: 30,
     WARN: 40,
     ERROR: 50,
-    trace: 10,
-    debug: 20,
-    info: 30,
-    warn: 40,
-    error: 50,
+    FATAL: 60,
   };
 
   constructor({
@@ -45,12 +41,16 @@ export class Quill {
     this.region = region;
     this.stage = stage;
     this.environment = environment;
-    this.level = level;
+    this.level = this.getLogLevel(level);
     this.logOutputFormat = logOutputFormat;
   }
 
   trace(message: Log | string) {
     this.log(LogLevel.TRACE, message);
+  }
+
+  debug(message: Log | string) {
+    this.log(LogLevel.DEBUG, message);
   }
 
   info(message: Log | string) {
@@ -65,8 +65,8 @@ export class Quill {
     this.log(LogLevel.ERROR, message);
   }
 
-  debug(message: Log | string) {
-    this.log(LogLevel.DEBUG, message);
+  fatal(message: Log | string) {
+    this.log(LogLevel.FATAL, message);
   }
 
   private log(level: LogLevel, log: Log | string) {
@@ -91,6 +91,10 @@ export class Quill {
     }
 
     this.write(fullLog);
+  }
+
+  private getLogLevel(level: AllLogLevels): LogLevel {
+    return level.toUpperCase() as LogLevel;
   }
 
   private isEnabled(level: LogLevel): boolean {
@@ -144,7 +148,8 @@ export class Quill {
       case LogLevel.WARN:
         return '\x1b[33mWARN\x1b[0m'; // Yellow color for WARN
       case LogLevel.ERROR:
-        return '\x1b[31mERROR\x1b[0m'; // Red color for ERROR
+      case LogLevel.FATAL:
+        return `\x1b[31m${level}\x1b[0m`; // Red color for ERROR / FATAL
       default:
         return level; // Return the log level as is if it's not recognized
     }
