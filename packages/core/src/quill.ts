@@ -33,7 +33,7 @@ export class Quill {
     level = LogLevel.INFO,
     hooks = [],
     logOutputFormat = LogOutputFormat.JSON,
-  }: QuillOptions) {
+  }: QuillOptions = {}) {
     this.hooks = hooks;
     this.service = service;
     this.appName = appName;
