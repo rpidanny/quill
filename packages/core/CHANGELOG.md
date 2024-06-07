@@ -1,3 +1,9 @@
+# [1.5.0](https://github.com/rpidanny/quill/compare/quill-v1.4.0...quill-v1.5.0) (2024-06-07)
+
+### Features
+
+- optional options ([#10](https://github.com/rpidanny/quill/issues/10)) ([82c384a](https://github.com/rpidanny/quill/commit/82c384af52daa4525440da92c05a977679f963f8))
+
 # [1.4.0](https://github.com/rpidanny/quill/compare/quill-v1.3.1...quill-v1.4.0) (2023-10-22)
 
 ### Features
