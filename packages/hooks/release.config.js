@@ -40,6 +40,12 @@ module.exports = {
     ],
     '@semantic-release/release-notes-generator',
     [
+      '@rpidanny/semantic-release-update-package.json',
+      {
+        packageJsonPath: `${srcRoot}/package.json`,
+      },
+    ],
+    [
       '@semantic-release/changelog',
       {
         changelogFile: `${srcRoot}/CHANGELOG.md`,
