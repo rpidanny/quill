@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/rpidanny/quill/compare/hooks-v1.0.0...hooks-v1.0.1) (2024-06-09)
+
+### Bug Fixes
+
+- package versions ([#13](https://github.com/rpidanny/quill/issues/13)) ([e4433ab](https://github.com/rpidanny/quill/commit/e4433abb3939ad90feb863db0b361f6e0a6aeaa0))
+
 # 1.0.0 (2024-06-09)
 
 ### Features
