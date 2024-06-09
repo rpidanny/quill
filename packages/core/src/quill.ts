@@ -2,6 +2,7 @@ import { hostname } from 'os';
 
 import { FullLog, Hook, Log, LogMetadata, QuillOptions } from './interfaces';
 import { AllLogLevels, LogLevel, LogOutputFormat } from './quill.enum';
+import moment = require('moment');
 
 export class Quill {
   private readonly hooks: Hook[];
@@ -103,7 +104,7 @@ export class Quill {
 
   private write(fullLog: FullLog) {
     if (this.logOutputFormat === LogOutputFormat.TEXT) {
-      const date = new Date(fullLog.timestamp).toISOString();
+      const date = moment(fullLog.timestamp).format('YYYY-MM-DD HH:mm:ss.SS Z');
       const colouredLevel = this.getColorForLogLevel(fullLog.level as LogLevel);
       const logText = `[${date}] [${colouredLevel}] ${fullLog.message}\n`;
       process.stdout.write(logText);
