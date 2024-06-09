@@ -1,3 +1,9 @@
+## [1.5.1](https://github.com/rpidanny/quill/compare/quill-v1.5.0...quill-v1.5.1) (2024-06-09)
+
+### Bug Fixes
+
+- local date time in text log ([#11](https://github.com/rpidanny/quill/issues/11)) ([ce82fcb](https://github.com/rpidanny/quill/commit/ce82fcbe0d071f193de62229fa21072ef5c01dfc))
+
 # [1.5.0](https://github.com/rpidanny/quill/compare/quill-v1.4.0...quill-v1.5.0) (2024-06-07)
 
 ### Features
