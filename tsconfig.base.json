@@ -19,7 +19,8 @@
     "strictPropertyInitialization": false,
     "baseUrl": ".",
     "paths": {
-      "@rpidanny/quill": ["packages/core/src/index.ts"]
+      "@rpidanny/quill": ["packages/core/src/index.ts"],
+      "@rpidanny/quill-hooks": ["packages/hooks/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
