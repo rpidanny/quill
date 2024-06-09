@@ -18,6 +18,7 @@
     "@nrwl/linter": "15.9.2",
     "@nrwl/workspace": "15.9.2",
     "@rpidanny/eslint-config-typescript": "^1.1.0",
+    "@rpidanny/semantic-release-update-package.json": "^1.0.0",
     "@types/jest": "^29.4.0",
     "@types/node": "16.11.7",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
