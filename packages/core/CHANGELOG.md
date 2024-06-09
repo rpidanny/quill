@@ -1,3 +1,9 @@
+## [1.5.2](https://github.com/rpidanny/quill/compare/quill-v1.5.1...quill-v1.5.2) (2024-06-09)
+
+### Bug Fixes
+
+- package versions ([#13](https://github.com/rpidanny/quill/issues/13)) ([e4433ab](https://github.com/rpidanny/quill/commit/e4433abb3939ad90feb863db0b361f6e0a6aeaa0))
+
 ## [1.5.1](https://github.com/rpidanny/quill/compare/quill-v1.5.0...quill-v1.5.1) (2024-06-09)
 
 ### Bug Fixes
