@@ -1,3 +1,9 @@
+# [1.6.0](https://github.com/rpidanny/quill/compare/quill-v1.5.2...quill-v1.6.0) (2024-06-14)
+
+### Features
+
+- remove timezone from text log ([#14](https://github.com/rpidanny/quill/issues/14)) ([34ba8b3](https://github.com/rpidanny/quill/commit/34ba8b32dc76a6c43b576fa0b883ffe28ca40285))
+
 ## [1.5.2](https://github.com/rpidanny/quill/compare/quill-v1.5.1...quill-v1.5.2) (2024-06-09)
 
 ### Bug Fixes
