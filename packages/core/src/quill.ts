@@ -104,7 +104,7 @@ export class Quill {
 
   private write(fullLog: FullLog) {
     if (this.logOutputFormat === LogOutputFormat.TEXT) {
-      const date = moment(fullLog.timestamp).format('YYYY-MM-DD HH:mm:ss.SS Z');
+      const date = moment(fullLog.timestamp).format('YYYY-MM-DD HH:mm:ss.SS');
       const colouredLevel = this.getColorForLogLevel(fullLog.level as LogLevel);
       const logText = `[${date}] [${colouredLevel}] ${fullLog.message}\n`;
       process.stdout.write(logText);
