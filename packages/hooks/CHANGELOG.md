@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/rpidanny/quill/compare/hooks-v1.0.1...hooks-v1.0.2) (2024-06-24)
+
+### Bug Fixes
+
+- quill hooks peer depedency ([#15](https://github.com/rpidanny/quill/issues/15)) ([312e5a2](https://github.com/rpidanny/quill/commit/312e5a2fa334826f8b9523ecf78b6ddeb0df2e2f))
+
 ## [1.0.1](https://github.com/rpidanny/quill/compare/hooks-v1.0.0...hooks-v1.0.1) (2024-06-09)
 
 ### Bug Fixes
