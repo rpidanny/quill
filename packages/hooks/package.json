@@ -9,5 +9,8 @@
     "type": "git",
     "url": "https://github.com/rpidanny/quill.git",
     "directory": "packages/hooks"
+  },
+  "peerDependencies": {
+    "@rpidanny/quill": "^1.5.0"
   }
 }
